@@ -62,6 +62,8 @@ A CLI tool that generates `tf`/`json` and `tfstate` files based on existing infr
         * [Vault](/docs/vault.md)
     * Identity
         * [Okta](/docs/okta.md)
+    * Feature Management
+        * [LaunchDarkly](/docs/launchdarkly.md)
 - [Contributing](#contributing)
 - [Developing](#developing)
 - [Infrastructure](#infrastructure)
@@ -285,6 +287,8 @@ Links to download Terraform Providers:
     * Xen Orchestra provider >= 0.18.0 - [here](https://github.com/ddelnano/terraform-provider-xenorchestra)
     * GmailFilter provider >= 1.0.1 - [here](https://github.com/yamamoto-febc/terraform-provider-gmailfilter)
     * Vault provider - [here](https://github.com/hashicorp/terraform-provider-vault)
+* Feature Management
+    * LaunchDarkly provider - [here](https://releases.hashicorp.com/terraform-provider-launchdarkly/)
 
 Information on provider plugins:
 https://www.terraform.io/docs/configuration/providers.html
