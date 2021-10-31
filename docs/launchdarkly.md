@@ -27,6 +27,8 @@ List of supported LaunchDarkly resources:
 *   `launchdarkly_project`
 *   `launchdarkly_feature_flag`
 *   `launchdarkly_feature_flag_environment`
+*   `launchdarkly_custom_role`
+*   `launchdarkly_segment`
 
 Docs
 
