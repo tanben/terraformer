@@ -3,22 +3,31 @@
 Usage:
 
 ```
-./terraformer {plan | import} launchdarkly --api-key {REST API KEY}  --proj-key {PROJECT KEY} --env-key {ENVIRONMENT KEY}  -r {project| flags | environment}
+./terraformer {plan | import} launchdarkly --api-key {REST API KEY}  --proj-key {PROJECT KEY} --env-key {ENVIRONMENT KEY}  -r {project| flags | flags_environment | custom_roles | segments | environment}
 
+
+OR
+
+export REST_API_KEY={REST API KEY}  // environment
+export PROJECT_KEY={PROJECT KEY}  // environment
+export ENVIRONMENT_KEY={ENVIRONMENT KEY}  // environment
+
+./terraformer plan launchdarkly -r project
+
+./terraformer import launchdarkly -r project,flags,flags_environment,custom_roles,segments,environment
 ```
 
 Example:
 
-Importing LaunchDarkly Project
 
 ```
-./terraformer import launchdarkly --api-key "REST-AA-111"  --proj-key "sample-demo-proj" -r project
+./terraformer import launchdarkly --api-key "REST-AA-111" --env-key="development" --proj-key "sample-demo-proj" -r project
 ```
 
-Importing LaunchDarkly Flags
+OR
 
 ```
-./terraformer import launchdarkly --api-key "REST-AA-111"  --proj-key "sample-demo-proj"  --env-key  development -r flags
+./terraformer import launchdarkly -r project,flags,flags_environment,custom_roles,segments,environment
 ```
 
 
@@ -29,6 +38,7 @@ List of supported LaunchDarkly resources:
 *   `launchdarkly_feature_flag_environment`
 *   `launchdarkly_custom_role`
 *   `launchdarkly_segment`
+*   `launchdarkly_environment`
 
 Docs
 

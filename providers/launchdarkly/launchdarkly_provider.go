@@ -2,6 +2,7 @@ package launchdarkly
 
 import (
 	"errors"
+	"os"
 
 	"github.com/GoogleCloudPlatform/terraformer/terraformutils"
 	"github.com/zclconf/go-cty/cty"
@@ -15,9 +16,35 @@ type LaunchDarklyProvider struct { //nolint
 }
 
 func (p *LaunchDarklyProvider) Init(args []string) error {
-	p.apiKey = args[0]
-	p.projectKey = args[1]
-	p.environmentKey = args[2]
+
+	if args[0] != "" {
+		p.apiKey = args[0]
+	} else {
+		if apiKey := os.Getenv("REST_API_KEY"); apiKey != "" {
+			p.apiKey = apiKey
+		} else {
+			return errors.New("missing api key")
+		}
+	}
+
+	if args[1] != "" {
+		p.projectKey = args[1]
+	} else {
+		if projectKey := os.Getenv("PROJECT_KEY"); projectKey != "" {
+			p.projectKey = projectKey
+		} else {
+			return errors.New("missing project key")
+		}
+	}
+	if args[2] != "" {
+		p.environmentKey = args[2]
+	} else {
+		if environmentKey := os.Getenv("ENVIRONMENT_KEY"); environmentKey != "" {
+			p.environmentKey = environmentKey
+		} else {
+			return errors.New("missing environment key")
+		}
+	}
 
 	return nil
 }
@@ -37,11 +64,12 @@ func (LaunchDarklyProvider) GetResourceConnections() map[string]map[string][]str
 func (p *LaunchDarklyProvider) GetSupportedService() map[string]terraformutils.ServiceGenerator {
 
 	return map[string]terraformutils.ServiceGenerator{
-		"project":      &ProjectGenerator{},
-		"flags":        &FlagsGenerator{},
-		"environment":  &FlagEnvironmentGenerator{},
-		"custom_roles": &CustomRoleGenerator{},
-		"segments":     &SegmentGenerator{},
+		"project":           &ProjectGenerator{},
+		"flags":             &FlagsGenerator{},
+		"flags_environment": &FlagEnvironmentGenerator{},
+		"custom_roles":      &CustomRoleGenerator{},
+		"segments":          &SegmentGenerator{},
+		"environment":       &EnvironmentGenerator{},
 	}
 }
 
